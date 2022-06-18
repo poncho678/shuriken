@@ -6,6 +6,10 @@ function setup() {
 
 function draw() {
   background("orange");
+  game.draw();
+}
+function keyPressed() {
+  game.keyPressed();
 }
 
 function preload() {
