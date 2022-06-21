@@ -3,6 +3,7 @@ class Game {
     this.player = new Player();
     this.opponentsArray = [];
     this.score = 0;
+    this.state = "ALIVE";
   }
   play() {
     this.player.draw();
@@ -10,11 +11,23 @@ class Game {
     // create enemies...
     if (frameCount % 120 === 0) {
       if (this.opponentsArray.length <= 10) {
-        this.opponentsArray.push(new Opponent());
+        this.opponentsArray.push(new Opponent(this.player));
       }
     }
     this.opponentsArray.forEach((opponent) => {
       opponent.draw();
+    });
+
+    // check if player collides with opponents
+    this.opponentsArray.forEach((opponent) => {
+      if (this.collionCheck(this.player, opponent)) {
+        this.player.health -= 1;
+
+        this.opponentsArray = this.removeItemFromArray(
+          opponent,
+          this.opponentsArray
+        );
+      }
     });
 
     // check if player projectiles hit opponents
@@ -22,27 +35,34 @@ class Game {
       this.opponentsArray.forEach((opponent) => {
         if (this.collionCheck(projectile, opponent)) {
           // if projectile hits enemy, remove projectile from Array
-          this.player.projectileArray = this.player.projectileArray.filter(
-            (item) => {
-              return item !== projectile;
-            }
+          this.player.projectileArray = this.removeItemFromArray(
+            projectile,
+            this.player.projectileArray
           );
-
           opponent.health -= 1;
 
           // check if health of Opponent is 0, then remove from array
           if (opponent.health === 0) {
             this.score += opponent.maxHealth * 100;
-            this.opponentsArray = this.opponentsArray.filter((item) => {
-              return item !== opponent;
-            });
+            this.opponentsArray = this.removeItemFromArray(
+              opponent,
+              this.opponentsArray
+            );
           }
         }
       });
     });
 
+    this.checkIfPlayerDied();
+
     this.ui = new UserInterface(this.player, this.score);
     this.ui.draw();
+  }
+
+  checkIfPlayerDied() {
+    if (this.player.health === 0) {
+      this.state = "DEAD";
+    }
   }
 
   preload() {}
@@ -76,10 +96,9 @@ class Game {
     );
   }
 
-  removeItemFromArray(item, array) {
-    console.log(array);
-    array = array.filter((element) => {
-      return element !== item;
+  removeItemFromArray(itemToBeRemoved, arrayToBefiltered) {
+    return arrayToBefiltered.filter((item) => {
+      return item !== itemToBeRemoved;
     });
   }
 }
