@@ -3,9 +3,9 @@ class Projectile {
     this.x = x;
     this.y = y;
     this.direction = direction;
-    this.width = PLAYER_SIZE / 3;
-    this.height = PLAYER_SIZE / 3;
-    this.speed = 7;
+    this.width = PLAYER_SIZE / 4;
+    this.height = PLAYER_SIZE / 4;
+    this.speed = 15;
   }
   draw() {
     push();

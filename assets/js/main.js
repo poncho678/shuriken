@@ -6,7 +6,7 @@ function setup() {
 
 function draw() {
   background("orange");
-  game.draw();
+  game.play();
 }
 function keyPressed() {
   game.keyPressed();

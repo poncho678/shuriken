@@ -6,7 +6,8 @@ class Player {
     this.direction = "right";
     this.x = CANVAS_WIDTH / 2 - this.width / 2;
     this.y = CANVAS_HEIGHT / 2 - this.height / 2;
-    this.shurikenArray = [];
+    this.projectileArray = [];
+    this.health = 3;
   }
 
   draw() {
@@ -14,7 +15,7 @@ class Player {
     this.move();
 
     // Shooting Mechanics
-    this.shurikenArray.forEach((projectile) => {
+    this.projectileArray.forEach((projectile) => {
       projectile.draw();
     });
     // Removing bad projectiles
@@ -51,7 +52,6 @@ class Player {
       this.direction = "up left";
     }
     if (keyIsDown(ARROW_UP) && keyIsDown(ARROW_RIGHT)) {
-      console.log("up right");
       this.direction = "up right";
     }
     if (keyIsDown(ARROW_DOWN) && keyIsDown(ARROW_LEFT)) {
@@ -69,7 +69,7 @@ class Player {
   }
 
   shuriken() {
-    this.shurikenArray.push(
+    this.projectileArray.push(
       new Projectile(
         this.x + this.width / 2,
         this.y + this.height / 2,
@@ -79,7 +79,7 @@ class Player {
   }
 
   cleanUpShuriken() {
-    this.shurikenArray = this.shurikenArray.filter((item) => {
+    this.projectileArray = this.projectileArray.filter((item) => {
       return (
         item.x <= CANVAS_WIDTH &&
         item.x >= 0 &&

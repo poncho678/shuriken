@@ -1,6 +1,6 @@
 const CANVAS_HEIGHT = 600;
 const CANVAS_WIDTH = 1000;
-const PLAYER_SIZE = 20;
+const PLAYER_SIZE = CANVAS_WIDTH / 16;
 
 // Keys
 const ARROW_RIGHT = 39;
