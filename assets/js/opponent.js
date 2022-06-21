@@ -15,7 +15,8 @@ class Opponent {
     fill("blue");
     rect(this.x, this.y, this.width, this.height);
     pop();
-    // draw healthbars
+
+    // draw healthbar
     push();
     fill("red");
     rect(
@@ -26,6 +27,8 @@ class Opponent {
       this.height / 10
     );
     pop();
+
+    // Creating a vector to make opponent follow player
     let move = createVector(this.x - this.player.x, this.y - this.player.y);
     move.normalize();
     this.x -= move.x * this.speed;
