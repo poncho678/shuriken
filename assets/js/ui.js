@@ -1,7 +1,7 @@
 class UserInterface {
-  constructor(player, score) {
+  constructor(player, game) {
     this.player = player;
-    this.score = score;
+    this.game = game;
     this.fontSize = CANVAS_WIDTH / 32;
   }
 
@@ -11,23 +11,49 @@ class UserInterface {
   }
 
   drawHealth() {
-    for (let i = 0; i < this.player.health; i++) {
-      ellipse(
-        this.fontSize + i * this.fontSize * 1.25,
-        this.fontSize,
-        this.fontSize,
-        this.fontSize
-      );
+    for (let i = 0; i < this.player.maxHealth; i++) {
+      if (i < this.player.health) {
+        image(
+          this.heart,
+          this.fontSize + i * PLAYER_SIZE,
+          TILESIZE,
+          PLAYER_SIZE,
+          PLAYER_SIZE,
+          0,
+          TILESIZE * 3,
+          32,
+          32
+        );
+      } else {
+        image(
+          this.heart,
+          this.fontSize + i * PLAYER_SIZE,
+          TILESIZE,
+          PLAYER_SIZE,
+          PLAYER_SIZE,
+          TILESIZE * 2,
+          TILESIZE * 3,
+          32,
+          32
+        );
+      }
     }
   }
 
   drawScore() {
     push();
     textAlign(RIGHT);
-    let scoreWidth = textWidth(this.score);
+    textFont(this.font);
     textSize(this.fontSize);
-    text(this.score, CANVAS_WIDTH - this.fontSize / 1.5, this.fontSize * 1.5);
+    text(
+      `score: ${this.game.score}`,
+      CANVAS_WIDTH - this.fontSize,
+      this.fontSize * 2
+    );
     pop();
   }
-  preload() {}
+  preload() {
+    this.font = loadFont("/assets/fonts/Mister Pixel Regular.otf");
+    this.heart = loadImage("/assets/images/ui/hearts32x32.png");
+  }
 }

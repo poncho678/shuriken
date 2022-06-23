@@ -3,14 +3,24 @@ class Projectile {
     this.x = x;
     this.y = y;
     this.direction = direction;
-    this.width = PLAYER_SIZE / 4;
-    this.height = PLAYER_SIZE / 4;
+    this.width = PLAYER_SIZE / 2;
+    this.height = PLAYER_SIZE / 2;
+    this.rotation = 0;
     this.speed = 15;
   }
   draw() {
     push();
-    fill("red");
-    rect(this.x, this.y, this.width, this.height);
+    translate(this.x, this.y);
+    rotate(this.rotation);
+    imageMode(CENTER);
+    image(shurikenImage[0], 0, 0, this.width, this.height);
+
+    if (this.direction === "left") {
+      this.rotation -= 5;
+    } else {
+      this.rotation += 5;
+    }
+
     if (this.direction === "up") {
       this.y -= this.speed;
     }
@@ -41,4 +51,6 @@ class Projectile {
     }
     pop();
   }
+
+  preload() {}
 }

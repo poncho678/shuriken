@@ -8,6 +8,7 @@ class Player {
     this.y = CANVAS_HEIGHT / 2 - this.height / 2;
     this.projectileArray = [];
     this.health = 3;
+    this.maxHealth = 3;
   }
 
   draw() {
@@ -18,6 +19,7 @@ class Player {
     this.projectileArray.forEach((projectile) => {
       projectile.draw();
     });
+
     // Removing bad projectiles
     this.cleanUpShuriken();
   }
@@ -47,7 +49,8 @@ class Player {
         this.direction = "right";
       }
     }
-    // diagonals???
+
+    // diagonals
     if (keyIsDown(ARROW_UP) && keyIsDown(ARROW_LEFT)) {
       this.direction = "up left";
     }
@@ -89,5 +92,11 @@ class Player {
     });
   }
 
-  preload() {}
+  dash() {}
+
+  preload() {
+    shurikenImage = [
+      loadImage("/assets/images/weapons/shuriken/shuriken_level_1.png"),
+    ];
+  }
 }

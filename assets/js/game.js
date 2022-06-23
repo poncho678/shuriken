@@ -3,7 +3,7 @@ class Game {
     this.player = new Player();
     this.opponentsArray = [];
     this.score = 0;
-    this.state = "ALIVE";
+    this.ui = new UserInterface(this.player, this);
   }
   play() {
     this.player.draw();
@@ -27,6 +27,7 @@ class Game {
           opponent,
           this.opponentsArray
         );
+        this.checkIfPlayerDied();
       }
     });
 
@@ -53,19 +54,19 @@ class Game {
       });
     });
 
-    this.checkIfPlayerDied();
-
-    this.ui = new UserInterface(this.player, this.score);
     this.ui.draw();
   }
 
   checkIfPlayerDied() {
     if (this.player.health === 0) {
-      this.state = "DEAD";
+      console.log("dead");
     }
   }
 
-  preload() {}
+  preload() {
+    this.player.preload();
+    this.ui.preload();
+  }
 
   keyPressed() {
     this.player.keyPressed();
