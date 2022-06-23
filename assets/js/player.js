@@ -96,7 +96,7 @@ class Player {
 
   preload() {
     shurikenImage = [
-      loadImage("/assets/images/weapons/shuriken/shuriken_level_1.png"),
+      loadImage("assets/images/weapons/shuriken/shuriken_level_1.png"),
     ];
   }
 }

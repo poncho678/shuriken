@@ -53,7 +53,7 @@ class UserInterface {
     pop();
   }
   preload() {
-    this.font = loadFont("/assets/fonts/Mister Pixel Regular.otf");
-    this.heart = loadImage("/assets/images/ui/hearts32x32.png");
+    this.heart = loadImage("assets/images/ui/hearts32x32.png");
+    this.font = loadFont("assets/fonts/Mister Pixel Regular.otf");
   }
 }
