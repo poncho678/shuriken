@@ -16,7 +16,7 @@ class UserInterface {
         image(
           this.heart,
           this.fontSize + i * PLAYER_SIZE,
-          TILESIZE,
+          PLAYER_SIZE / 2,
           PLAYER_SIZE,
           PLAYER_SIZE,
           0,
@@ -28,7 +28,7 @@ class UserInterface {
         image(
           this.heart,
           this.fontSize + i * PLAYER_SIZE,
-          TILESIZE,
+          PLAYER_SIZE / 2,
           PLAYER_SIZE,
           PLAYER_SIZE,
           TILESIZE * 2,
@@ -42,6 +42,7 @@ class UserInterface {
 
   drawScore() {
     push();
+    fill("lightgray");
     textAlign(RIGHT);
     textFont(this.font);
     textSize(this.fontSize);

@@ -3,8 +3,8 @@ class Opponent {
     this.player = player;
     this.width = PLAYER_SIZE;
     this.height = PLAYER_SIZE;
-    this.x = random(0, CANVAS_WIDTH - this.width);
-    this.y = random(0, CANVAS_HEIGHT - this.height);
+    this.x = this.spawnRandom(0, CANVAS_WIDTH - this.width, this.player.x);
+    this.y = this.spawnRandom(0, CANVAS_HEIGHT - this.height, this.player.y);
     this.health = 3;
     this.maxHealth = 3;
     this.speed = 2;
@@ -35,4 +35,16 @@ class Opponent {
     this.y -= move.y * this.speed;
   }
   shoot() {}
+
+  // Spawnlogic to create safespace for player and prevent spawn ontop of player
+  spawnRandom(min, max, axis) {
+    let newRandom = random(min, max);
+    if (
+      newRandom > axis - PLAYER_SIZE * 2 &&
+      newRandom < axis + PLAYER_SIZE * 3
+    ) {
+      return this.spawnRandom(min, max, axis);
+    }
+    return newRandom;
+  }
 }

@@ -9,6 +9,16 @@ class Player {
     this.projectileArray = [];
     this.health = 3;
     this.maxHealth = 3;
+
+    // change to attributes, when implementing powerups
+    // this.attributes = {
+    //   attackSpeed: "",
+    //   projectileSpeed: "",
+    //   strength: 1,
+    //   moveSpeed: CANVAS_WIDTH / 150,
+    //   health: 3,
+    //   maxHealth: 3,
+    // };
   }
 
   draw() {

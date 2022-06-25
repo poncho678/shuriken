@@ -4,16 +4,18 @@ class Game {
     this.opponentsArray = [];
     this.score = 0;
     this.ui = new UserInterface(this.player, this);
+    this.isDead = false;
   }
   play() {
     this.player.draw();
 
-    // create enemies...
+    // create opponents...
     if (frameCount % 120 === 0) {
       if (this.opponentsArray.length <= 10) {
         this.opponentsArray.push(new Opponent(this.player));
       }
     }
+    // draw Opponents
     this.opponentsArray.forEach((opponent) => {
       opponent.draw();
     });
@@ -54,12 +56,14 @@ class Game {
       });
     });
 
+    //
     this.ui.draw();
   }
 
   checkIfPlayerDied() {
     if (this.player.health === 0) {
       console.log("dead");
+      this.isDead = true;
     }
   }
 

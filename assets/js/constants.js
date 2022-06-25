@@ -1,6 +1,6 @@
 // Settings
-const CANVAS_HEIGHT = 600;
-const CANVAS_WIDTH = 1000;
+const CANVAS_WIDTH = 600;
+const CANVAS_HEIGHT = (CANVAS_WIDTH / 3) * 2;
 const PLAYER_SIZE = CANVAS_WIDTH / 16;
 const TILESIZE = 32;
 
