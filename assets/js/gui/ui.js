@@ -1,12 +1,10 @@
 class UserInterface {
-  constructor(player, game) {
+  constructor(player) {
     this.player = player;
-    this.game = game;
     this.fontSize = CANVAS_WIDTH / 32;
   }
 
   draw() {
-    this.drawScore();
     this.drawHealth();
   }
 
@@ -40,17 +38,13 @@ class UserInterface {
     }
   }
 
-  drawScore() {
+  drawScore(value) {
     push();
     fill("lightgray");
     textAlign(RIGHT);
     textFont(this.font);
     textSize(this.fontSize);
-    text(
-      `score: ${this.game.score}`,
-      CANVAS_WIDTH - this.fontSize,
-      this.fontSize * 2
-    );
+    text(`score: ${value}`, CANVAS_WIDTH - this.fontSize, this.fontSize * 2);
     pop();
   }
   preload() {

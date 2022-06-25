@@ -3,10 +3,10 @@ class Game {
     this.player = new Player();
     this.opponentsArray = [];
     this.score = 0;
-    this.ui = new UserInterface(this.player, this);
-    this.isDead = false;
+    this.ui = new UserInterface(this.player);
   }
   play() {
+    noSmooth();
     this.player.draw();
 
     // create opponents...
@@ -56,14 +56,14 @@ class Game {
       });
     });
 
-    //
+    // draw UI and Update score
     this.ui.draw();
+    this.ui.drawScore(this.score);
   }
 
   checkIfPlayerDied() {
     if (this.player.health === 0) {
       console.log("dead");
-      this.isDead = true;
     }
   }
 

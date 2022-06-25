@@ -47,4 +47,128 @@ class Opponent {
     }
     return newRandom;
   }
+  preload() {
+    this.opponentImg = {
+      [OPPONENT_DIRECTIONS.down]: [
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 0,
+          y: 0,
+          width: 16,
+          height: 16,
+        },
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 0,
+          y: 16,
+          width: 16,
+          height: 16,
+        },
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 0,
+          y: 32,
+          width: 16,
+          height: 16,
+        },
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 0,
+          y: 48,
+          width: 16,
+          height: 16,
+        },
+      ],
+      [OPPONENT_DIRECTIONS.up]: [
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 16,
+          y: 0,
+          width: 16,
+          height: 16,
+        },
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 16,
+          y: 16,
+          width: 16,
+          height: 16,
+        },
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 16,
+          y: 32,
+          width: 16,
+          height: 16,
+        },
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 16,
+          y: 48,
+          width: 16,
+          height: 16,
+        },
+      ],
+      [OPPONENT_DIRECTIONS.left]: [
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 32,
+          y: 0,
+          width: 16,
+          height: 16,
+        },
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 32,
+          y: 16,
+          width: 16,
+          height: 16,
+        },
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 32,
+          y: 32,
+          width: 16,
+          height: 16,
+        },
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 32,
+          y: 48,
+          width: 16,
+          height: 16,
+        },
+      ],
+      [OPPONENT_DIRECTIONS.right]: [
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 48,
+          y: 0,
+          width: 16,
+          height: 16,
+        },
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 48,
+          y: 16,
+          width: 16,
+          height: 16,
+        },
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 48,
+          y: 32,
+          width: 16,
+          height: 16,
+        },
+        {
+          img: loadImage("assets/images/opponents/skeleton/Walk.png"),
+          x: 48,
+          y: 48,
+          width: 16,
+          height: 16,
+        },
+      ],
+    };
+  }
 }

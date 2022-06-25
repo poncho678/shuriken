@@ -2,13 +2,15 @@ class Player {
   constructor() {
     this.width = PLAYER_SIZE;
     this.height = PLAYER_SIZE;
-    this.moveSpeed = CANVAS_WIDTH / 150;
-    this.direction = "right";
     this.x = CANVAS_WIDTH / 2 - this.width / 2;
     this.y = CANVAS_HEIGHT / 2 - this.height / 2;
     this.projectileArray = [];
+    this.state = PLAYER_STATES.idle;
+    this.direction = PLAYER_DIRECTIONS.down;
+    this.moveSpeed = CANVAS_WIDTH / 150;
     this.health = 3;
     this.maxHealth = 3;
+    this.attackMoment = 0;
 
     // change to attributes, when implementing powerups
     // this.attributes = {
@@ -22,8 +24,28 @@ class Player {
   }
 
   draw() {
-    rect(this.x, this.y, this.width, this.height);
-    this.move();
+    // moving the player
+    if (this.state !== PLAYER_STATES.dead) {
+      this.move();
+      this.setStates();
+    }
+
+    const { state, direction } = this;
+    const playerSprite = this.playerSprites[state][direction];
+    const index = frameCount % playerSprite.length;
+
+    // drawing the player
+    image(
+      playerSprite[index].img,
+      this.x,
+      this.y,
+      this.width,
+      this.height,
+      playerSprite[index].x,
+      playerSprite[index].y,
+      playerSprite[index].width,
+      playerSprite[index].height
+    );
 
     // Shooting Mechanics
     this.projectileArray.forEach((projectile) => {
@@ -34,54 +56,60 @@ class Player {
     this.cleanUpShuriken();
   }
 
+  setStates() {
+    if (this.health <= 0) {
+      this.state = PLAYER_STATES.dead;
+      return;
+    } else if (keyIsPressed && !keyIsDown(SPACE_BAR)) {
+      this.state = PLAYER_STATES.walk;
+    } else if (
+      this.state === PLAYER_STATES.attack &&
+      this.attackMoment + 30 >= frameCount
+    ) {
+      return;
+    } else {
+      this.state = PLAYER_STATES.idle;
+    }
+  }
+
   move() {
-    if (keyIsDown(ARROW_UP)) {
-      if (this.y >= 0) {
-        this.y -= this.moveSpeed;
-        this.direction = "up";
-      }
-    }
-    if (keyIsDown(ARROW_DOWN)) {
-      if (this.y <= CANVAS_HEIGHT - this.height) {
-        this.y += this.moveSpeed;
-        this.direction = "down";
-      }
-    }
     if (keyIsDown(ARROW_LEFT)) {
       if (this.x >= 0) {
         this.x -= this.moveSpeed;
-        this.direction = "left";
-      }
-    }
-    if (keyIsDown(ARROW_RIGHT)) {
-      if (this.x <= CANVAS_WIDTH - this.width) {
-        this.x += this.moveSpeed;
-        this.direction = "right";
+        this.direction = PLAYER_DIRECTIONS.left;
       }
     }
 
-    // diagonals
-    if (keyIsDown(ARROW_UP) && keyIsDown(ARROW_LEFT)) {
-      this.direction = "up left";
+    if (keyIsDown(ARROW_RIGHT)) {
+      if (this.x <= CANVAS_WIDTH - this.width) {
+        this.x += this.moveSpeed;
+        this.direction = PLAYER_DIRECTIONS.right;
+      }
     }
-    if (keyIsDown(ARROW_UP) && keyIsDown(ARROW_RIGHT)) {
-      this.direction = "up right";
+
+    if (keyIsDown(ARROW_DOWN)) {
+      if (this.y <= CANVAS_HEIGHT - this.height) {
+        this.y += this.moveSpeed;
+        this.direction = PLAYER_DIRECTIONS.down;
+      }
     }
-    if (keyIsDown(ARROW_DOWN) && keyIsDown(ARROW_LEFT)) {
-      this.direction = "down left";
-    }
-    if (keyIsDown(ARROW_DOWN) && keyIsDown(ARROW_RIGHT)) {
-      this.direction = "down right";
+    if (keyIsDown(ARROW_UP)) {
+      if (this.y >= 0) {
+        this.y -= this.moveSpeed;
+        this.direction = PLAYER_DIRECTIONS.up;
+      }
     }
   }
 
   keyPressed() {
-    if (keyCode === SPACE_BAR) {
+    if (keyCode === SPACE_BAR && this.state !== PLAYER_STATES.dead) {
       this.shuriken();
     }
   }
 
   shuriken() {
+    this.state = PLAYER_STATES.attack;
+    this.attackMoment = frameCount;
     this.projectileArray.push(
       new Projectile(
         this.x + this.width / 2,
@@ -108,5 +136,244 @@ class Player {
     shurikenImage = [
       loadImage("assets/images/weapons/shuriken/shuriken_level_1.png"),
     ];
+    // adding PlayerSprites
+    this.playerSprites = {
+      [PLAYER_STATES.attack]: {
+        [PLAYER_DIRECTIONS.down]: [
+          {
+            img: loadImage("assets/images/player/Attack.png"),
+            x: 0,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+        ],
+        [PLAYER_DIRECTIONS.up]: [
+          {
+            img: loadImage("assets/images/player/Attack.png"),
+            x: 16,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+        ],
+        [PLAYER_DIRECTIONS.left]: [
+          {
+            img: loadImage("assets/images/player/Attack.png"),
+            x: 32,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+        ],
+        [PLAYER_DIRECTIONS.right]: [
+          {
+            img: loadImage("assets/images/player/Attack.png"),
+            x: 48,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+        ],
+      },
+      [PLAYER_STATES.idle]: {
+        [PLAYER_DIRECTIONS.down]: [
+          {
+            img: loadImage("assets/images/player/Idle.png"),
+            x: 0,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+        ],
+        [PLAYER_DIRECTIONS.up]: [
+          {
+            img: loadImage("assets/images/player/Idle.png"),
+            x: 16,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+        ],
+        [PLAYER_DIRECTIONS.left]: [
+          {
+            img: loadImage("assets/images/player/Idle.png"),
+            x: 32,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+        ],
+        [PLAYER_DIRECTIONS.right]: [
+          {
+            img: loadImage("assets/images/player/Idle.png"),
+            x: 48,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+        ],
+      },
+      [PLAYER_STATES.walk]: {
+        [PLAYER_DIRECTIONS.down]: [
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 0,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 0,
+            y: 16,
+            width: 16,
+            height: 16,
+          },
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 0,
+            y: 32,
+            width: 16,
+            height: 16,
+          },
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 0,
+            y: 48,
+            width: 16,
+            height: 16,
+          },
+        ],
+        [PLAYER_DIRECTIONS.up]: [
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 16,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 16,
+            y: 16,
+            width: 16,
+            height: 16,
+          },
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 16,
+            y: 32,
+            width: 16,
+            height: 16,
+          },
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 16,
+            y: 48,
+            width: 16,
+            height: 16,
+          },
+        ],
+        [PLAYER_DIRECTIONS.left]: [
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 32,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 32,
+            y: 16,
+            width: 16,
+            height: 16,
+          },
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 32,
+            y: 32,
+            width: 16,
+            height: 16,
+          },
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 32,
+            y: 48,
+            width: 16,
+            height: 16,
+          },
+        ],
+        [PLAYER_DIRECTIONS.right]: [
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 48,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 48,
+            y: 16,
+            width: 16,
+            height: 16,
+          },
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 48,
+            y: 32,
+            width: 16,
+            height: 16,
+          },
+          {
+            img: loadImage("assets/images/player/Walk.png"),
+            x: 48,
+            y: 48,
+            width: 16,
+            height: 16,
+          },
+        ],
+      },
+      [PLAYER_STATES.dead]: {
+        [PLAYER_DIRECTIONS.down]: [
+          {
+            img: loadImage("assets/images/player/Dead.png"),
+            x: 0,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+        ],
+        [PLAYER_DIRECTIONS.up]: [
+          {
+            img: loadImage("assets/images/player/Dead.png"),
+            x: 0,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+        ],
+        [PLAYER_DIRECTIONS.left]: [
+          {
+            img: loadImage("assets/images/player/Dead.png"),
+            x: 0,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+        ],
+        [PLAYER_DIRECTIONS.right]: [
+          {
+            img: loadImage("assets/images/player/Dead.png"),
+            x: 0,
+            y: 0,
+            width: 16,
+            height: 16,
+          },
+        ],
+      },
+    };
   }
 }
