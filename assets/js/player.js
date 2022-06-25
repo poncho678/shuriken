@@ -110,13 +110,22 @@ class Player {
   shuriken() {
     this.state = PLAYER_STATES.attack;
     this.attackMoment = frameCount;
-    this.projectileArray.push(
-      new Projectile(
-        this.x + this.width / 2,
-        this.y + this.height / 2,
-        this.direction
-      )
-    );
+    let left, top;
+
+    if (this.direction === PLAYER_DIRECTIONS.up) {
+      left = this.x + this.width * 0.3;
+      top = this.y - PLAYER_SIZE / 4;
+    } else if (this.direction === PLAYER_DIRECTIONS.down) {
+      left = this.x + this.width * 0.4;
+      top = this.y + this.height + PLAYER_SIZE / 4;
+    } else if (this.direction === PLAYER_DIRECTIONS.left) {
+      left = this.x - PLAYER_SIZE / 4;
+      top = this.y + this.height * 0.75;
+    } else {
+      left = this.x + this.width + PLAYER_SIZE / 4;
+      top = this.y + this.height * 0.75;
+    }
+    this.projectileArray.push(new Projectile(left, top, this.direction));
   }
 
   cleanUpShuriken() {
