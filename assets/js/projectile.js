@@ -9,6 +9,18 @@ class Projectile {
     this.speed = 15;
   }
   draw() {
+    //draw shadow
+    push();
+    fill(0, 0, 0, 55);
+    noStroke();
+    ellipse(
+      this.x,
+      this.y + PLAYER_SIZE / 3,
+      (this.width / 3) * 2.5,
+      this.height / 3
+    );
+    pop();
+
     push();
     translate(this.x, this.y);
     rotate(this.rotation);

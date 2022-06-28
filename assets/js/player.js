@@ -3,7 +3,7 @@ class Player {
     this.width = PLAYER_SIZE;
     this.height = PLAYER_SIZE;
     this.x = CANVAS_WIDTH / 2 - this.width / 2;
-    this.y = CANVAS_HEIGHT / 2 - this.height * 1.5;
+    this.y = CANVAS_HEIGHT / 2 - this.height * 1.75;
     this.projectileArray = [];
     this.state = PLAYER_STATES.idle;
     this.direction = PLAYER_DIRECTIONS.down;
