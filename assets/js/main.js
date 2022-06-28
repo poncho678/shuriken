@@ -6,7 +6,7 @@ function setup() {
 }
 
 function draw() {
-  background("orange");
+  noSmooth();
   game.play();
 }
 function keyPressed() {

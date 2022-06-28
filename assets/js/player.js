@@ -3,7 +3,7 @@ class Player {
     this.width = PLAYER_SIZE;
     this.height = PLAYER_SIZE;
     this.x = CANVAS_WIDTH / 2 - this.width / 2;
-    this.y = CANVAS_HEIGHT / 2 - this.height / 2;
+    this.y = CANVAS_HEIGHT / 2 - this.height * 1.5;
     this.projectileArray = [];
     this.state = PLAYER_STATES.idle;
     this.direction = PLAYER_DIRECTIONS.down;
@@ -33,6 +33,18 @@ class Player {
     const { state, direction } = this;
     const playerSprite = this.playerSprites[state][direction];
     const index = frameCount % playerSprite.length;
+
+    //draw shadow
+    push();
+    fill(0, 0, 0, 55);
+    noStroke();
+    ellipse(
+      this.x + this.width / 2,
+      this.y + this.height,
+      this.width,
+      this.height / 3
+    );
+    pop();
 
     // drawing the player
     image(
@@ -64,7 +76,7 @@ class Player {
       this.state = PLAYER_STATES.walk;
     } else if (
       this.state === PLAYER_STATES.attack &&
-      this.attackMoment + 30 >= frameCount
+      this.attackMoment + 15 >= frameCount
     ) {
       return;
     } else {

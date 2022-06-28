@@ -20,6 +20,7 @@ const SPACE_BAR = 32;
 
 // Images
 let shurikenImage;
+let opponentSprites;
 
 // PLAYER
 const PLAYER_DIRECTIONS = {
