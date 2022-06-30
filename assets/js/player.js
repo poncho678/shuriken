@@ -85,27 +85,27 @@ class Player {
   }
 
   move() {
-    if (keyIsDown(ARROW_LEFT)) {
+    if (keyIsDown(ARROW_LEFT) || keyIsDown(KEY_A)) {
       if (this.x >= 0) {
         this.x -= this.moveSpeed;
         this.direction = PLAYER_DIRECTIONS.left;
       }
     }
 
-    if (keyIsDown(ARROW_RIGHT)) {
+    if (keyIsDown(ARROW_RIGHT) || keyIsDown(KEY_D)) {
       if (this.x <= CANVAS_WIDTH - this.width) {
         this.x += this.moveSpeed;
         this.direction = PLAYER_DIRECTIONS.right;
       }
     }
 
-    if (keyIsDown(ARROW_DOWN)) {
+    if (keyIsDown(ARROW_DOWN) || keyIsDown(KEY_S)) {
       if (this.y <= CANVAS_HEIGHT - this.height) {
         this.y += this.moveSpeed;
         this.direction = PLAYER_DIRECTIONS.down;
       }
     }
-    if (keyIsDown(ARROW_UP)) {
+    if (keyIsDown(ARROW_UP) || keyIsDown(KEY_W)) {
       if (this.y >= 0) {
         this.y -= this.moveSpeed;
         this.direction = PLAYER_DIRECTIONS.up;

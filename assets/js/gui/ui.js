@@ -40,11 +40,11 @@ class UserInterface {
 
   drawScore(value) {
     push();
-    fill("lightgray");
+    fill(144, 181, 224);
     textAlign(RIGHT);
     textFont(this.font);
     textSize(this.fontSize);
-    text(`score: ${value}`, CANVAS_WIDTH - this.fontSize, this.fontSize * 2);
+    text(`score: ${value}`, CANVAS_WIDTH - this.fontSize, this.fontSize);
     pop();
   }
   preload() {
