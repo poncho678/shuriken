@@ -4,8 +4,8 @@ class DeathScreen {
     this.y = -10;
   }
   draw() {
-    background(37, 55, 74);
-    // background(17, 30, 44);
+    // background(37, 55, 74);
+    background(17, 30, 44);
     // background(6, 17, 28);
     // fill(44, 104, 104);
     textFont(this.font);

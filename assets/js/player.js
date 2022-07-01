@@ -119,6 +119,7 @@ class Player {
     }
   }
 
+  // firing projectiles
   shuriken() {
     this.state = PLAYER_STATES.attack;
     this.attackMoment = frameCount;
@@ -140,6 +141,7 @@ class Player {
     this.projectileArray.push(new Projectile(left, top, this.direction));
   }
 
+  // removing bad projectiles
   cleanUpShuriken() {
     this.projectileArray = this.projectileArray.filter((item) => {
       return (
@@ -153,7 +155,21 @@ class Player {
 
   dash() {}
 
+  // always update the reset after changing constructor.
+  reset() {
+    this.x = CANVAS_WIDTH / 2 - this.width / 2;
+    this.y = CANVAS_HEIGHT / 2 - this.height * 1.75;
+    this.projectileArray = [];
+    this.state = PLAYER_STATES.idle;
+    this.direction = PLAYER_DIRECTIONS.down;
+    this.moveSpeed = CANVAS_WIDTH / 150;
+    this.health = 3;
+    this.maxHealth = 3;
+    this.attackMoment = 0;
+  }
+
   preload() {
+    // loading Pprojectileimage here, because no idea how else to preload...
     shurikenImage = [
       loadImage("assets/images/weapons/shuriken/shuriken_level_1.png"),
     ];

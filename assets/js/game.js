@@ -3,6 +3,7 @@ class Game {
     this.player = new Player();
     this.opponentsArray = [];
     this.score = 0;
+    this.counter = 0;
     this.ui = new UserInterface(this.player);
     this.background = new Background();
   }
@@ -12,7 +13,7 @@ class Game {
 
     // create opponents...
     if (frameCount % 120 === 0) {
-      if (this.opponentsArray.length <= 10) {
+      if (this.opponentsArray.length <= 50) {
         this.opponentsArray.push(new Opponent(this.player));
       }
     }
@@ -47,6 +48,7 @@ class Game {
           // check if health of Opponent is 0, then remove from array
           if (opponent.health === 0) {
             this.score += opponent.maxHealth * 100;
+            this.counter += 1;
             this.opponentsArray = this.removeItemFromArray(
               opponent,
               this.opponentsArray
@@ -59,6 +61,13 @@ class Game {
     // draw UI and Update score
     this.ui.draw();
     this.ui.drawScore(this.score);
+  }
+
+  reset() {
+    this.opponentsArray = [];
+    this.score = 0;
+    this.counter = 0;
+    this.player.reset();
   }
 
   preload() {

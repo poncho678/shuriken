@@ -11,14 +11,15 @@ function setup() {
 function draw() {
   noSmooth();
   clear();
-  setGameState();
 
   if (currentGameState === GAME_STATES.start) {
     startScreen.draw();
   } else if (currentGameState === GAME_STATES.play) {
     game.play();
+    setGameState();
   } else if (currentGameState === GAME_STATES.dead) {
     deathScreen.draw();
+    game.reset();
   }
 }
 function keyPressed() {
