@@ -9,9 +9,11 @@ class Opponent {
     this.health = 3;
     this.maxHealth = 3;
     this.speed = 2;
+    this.gotHit = false;
+    this.gotHitMoment = 0;
   }
   draw() {
-    // Creating a vector to make opponent follow player
+    // Creating a vector to make the opponent follow the player
     let move = createVector(this.x - this.player.x, this.y - this.player.y);
     move.normalize();
     this.x -= move.x * this.speed;
@@ -21,7 +23,7 @@ class Opponent {
     const opponentSprite = opponentSprites[direction];
     const index = frameCount % opponentSprite.length;
 
-    //draw shadow
+    //draw dropshadow
     push();
     fill(0, 0, 0, 55);
     noStroke();
@@ -35,6 +37,14 @@ class Opponent {
 
     // draw opponent
     push();
+
+    // If Opponent gets hit, Color The Image for a few Frames
+    if (this.gotHit) {
+      tint(255, 0, 0);
+    }
+    if (this.gotHitMoment + 3 <= frameCount && this.gotHit) {
+      this.gotHit = false;
+    }
     image(
       opponentSprite[index].img,
       this.x,
@@ -67,13 +77,14 @@ class Opponent {
     let newRandom = random(min, max);
     if (
       newRandom > axis - PLAYER_SIZE * 2 &&
-      newRandom < axis + PLAYER_SIZE * 3
+      newRandom < axis + PLAYER_SIZE * 2
     ) {
       return this.spawnRandom(min, max, axis);
     }
     return newRandom;
   }
 
+  // Determin in which direction the opponent is facing.
   calculateDirection(vectorX, vectorY) {
     if (vectorX < 0 && vectorY < 0) {
       if (Math.abs(vectorX) > Math.abs(vectorY)) {

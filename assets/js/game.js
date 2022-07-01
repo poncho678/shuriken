@@ -44,6 +44,8 @@ class Game {
             this.player.projectileArray
           );
           opponent.health -= 1;
+          opponent.gotHitMoment = frameCount;
+          opponent.gotHit = true;
 
           // check if health of Opponent is 0, then remove from array
           if (opponent.health === 0) {
