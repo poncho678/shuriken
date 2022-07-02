@@ -32,6 +32,21 @@ let shurikenImage;
 let opponentSprites;
 
 // Player Settings
+
+const PLAYER_BASESTATS = {
+  x: CANVAS_WIDTH / 2 - PLAYER_SIZE / 2,
+  y: CANVAS_HEIGHT / 2 - PLAYER_SIZE * 1.75,
+  health: 3,
+  maxHealth: 3,
+  healthCap: 6,
+  moveSpeed: CANVAS_WIDTH / 150,
+  moveSpeedCap: (CANVAS_WIDTH / 150) * 1.5,
+  projectileSpeed: 15,
+  strength: 1,
+  strengthCap: 3,
+};
+Object.freeze(PLAYER_BASESTATS);
+
 const PLAYER_DIRECTIONS = {
   up: "up",
   down: "down",

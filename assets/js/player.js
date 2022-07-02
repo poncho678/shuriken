@@ -2,25 +2,16 @@ class Player {
   constructor() {
     this.width = PLAYER_SIZE;
     this.height = PLAYER_SIZE;
-    this.x = CANVAS_WIDTH / 2 - this.width / 2;
-    this.y = CANVAS_HEIGHT / 2 - this.height * 1.75;
+    this.x = PLAYER_BASESTATS.x;
+    this.y = PLAYER_BASESTATS.y;
     this.projectileArray = [];
     this.state = PLAYER_STATES.idle;
     this.direction = PLAYER_DIRECTIONS.down;
-    this.moveSpeed = CANVAS_WIDTH / 150;
-    this.health = 3;
-    this.maxHealth = 3;
+    this.moveSpeed = PLAYER_BASESTATS.moveSpeed;
+    this.health = PLAYER_BASESTATS.health;
+    this.maxHealth = PLAYER_BASESTATS.maxHealth;
+    this.strength = PLAYER_BASESTATS.strength;
     this.attackMoment = 0;
-
-    // change to attributes, when implementing powerups
-    // this.attributes = {
-    //   attackSpeed: "",
-    //   projectileSpeed: "",
-    //   strength: 1,
-    //   moveSpeed: CANVAS_WIDTH / 150,
-    //   health: 3,
-    //   maxHealth: 3,
-    // };
   }
 
   draw() {
@@ -157,14 +148,16 @@ class Player {
 
   // always update the reset after changing constructor.
   reset() {
-    this.x = CANVAS_WIDTH / 2 - this.width / 2;
-    this.y = CANVAS_HEIGHT / 2 - this.height * 1.75;
-    this.projectileArray = [];
+    this.x = PLAYER_BASESTATS.x;
+    this.y = PLAYER_BASESTATS.y;
+    this.moveSpeed = PLAYER_BASESTATS.moveSpeed;
+    this.health = PLAYER_BASESTATS.health;
+    this.maxHealth = PLAYER_BASESTATS.maxHealth;
+    this.strength = PLAYER_BASESTATS.strength;
+
     this.state = PLAYER_STATES.idle;
     this.direction = PLAYER_DIRECTIONS.down;
-    this.moveSpeed = CANVAS_WIDTH / 150;
-    this.health = 3;
-    this.maxHealth = 3;
+    this.projectileArray = [];
     this.attackMoment = 0;
   }
 

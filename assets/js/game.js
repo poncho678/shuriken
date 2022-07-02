@@ -2,6 +2,7 @@ class Game {
   constructor() {
     this.player = new Player();
     this.opponentsArray = [];
+    this.powerUpArray = [];
     this.score = 0;
     this.counter = 0;
     this.ui = new UserInterface(this.player);
@@ -17,13 +18,24 @@ class Game {
         this.opponentsArray.push(new Opponent(this.player));
       }
     }
+
+    // drawp Powerups
+    this.powerUpArray.forEach((powerup) => {
+      powerup.draw();
+      if (this.collionCheck(this.player, powerup)) {
+        powerup.data.effect(this.player);
+        this.powerUpArray = this.removeItemFromArray(
+          powerup,
+          this.powerUpArray
+        );
+      }
+    });
+
     // draw Opponents
     this.opponentsArray.forEach((opponent) => {
       opponent.draw();
-    });
 
-    // check if player collides with opponents
-    this.opponentsArray.forEach((opponent) => {
+      // check if player collides with opponents
       if (this.collionCheck(this.player, opponent)) {
         this.player.health -= 1;
 
@@ -43,14 +55,15 @@ class Game {
             projectile,
             this.player.projectileArray
           );
-          opponent.health -= 1;
+          opponent.health -= this.player.strength;
           opponent.gotHitMoment = frameCount;
           opponent.gotHit = true;
 
           // check if health of Opponent is 0, then remove from array
-          if (opponent.health === 0) {
+          if (opponent.health <= 0) {
             this.score += opponent.maxHealth * 100;
             this.counter += 1;
+            this.dropPowerup(opponent.x, opponent.y);
             this.opponentsArray = this.removeItemFromArray(
               opponent,
               this.opponentsArray
@@ -65,8 +78,17 @@ class Game {
     this.ui.drawScore(this.score);
   }
 
+  dropPowerup(opponentX, opponentY) {
+    const chance = Math.random();
+    if (chance > 0.9) {
+      this.powerUpArray.push(new Powerup(opponentX, opponentY));
+    }
+  }
+
+  // Reset The Game
   reset() {
     this.opponentsArray = [];
+    this.powerUpArray = [];
     this.score = 0;
     this.counter = 0;
     this.player.reset();
