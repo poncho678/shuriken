@@ -48,7 +48,7 @@ class Powerup {
           if (!this.powerUpUsed) {
             if (
               player.maxHealth < PLAYER_BASESTATS.healthCap &&
-              player.health === PLAYER_BASESTATS.healthCap
+              player.health === player.maxHealth
             ) {
               player.maxHealth += 1;
             } else {
@@ -74,10 +74,10 @@ class Powerup {
       {
         color: "yellow",
         effect: function (player) {
-          if (player.moveSpeed < PLAYER_BASESTATS.moveSpeedCap) {
-            player.moveSpeed += 0.5;
-          }
           if (!this.powerUpUsed) {
+            if (player.moveSpeed < PLAYER_BASESTATS.moveSpeedCap) {
+              player.moveSpeed += 0.5;
+            }
             this.powerUpUsed = true;
           }
         },
