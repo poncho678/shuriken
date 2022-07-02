@@ -38,6 +38,21 @@ class UserInterface {
     }
   }
 
+  drawShuriken(value) {
+    for (let i = 0; i < value; i++) {
+      push();
+      translate(
+        PLAYER_SIZE + (i * PLAYER_SIZE) / 3,
+        CANVAS_HEIGHT - PLAYER_SIZE
+      );
+      angleMode(DEGREES);
+      rotate(45);
+      imageMode(CENTER);
+      image(this.shuriken, 0, 0, PLAYER_SIZE, PLAYER_SIZE);
+      pop();
+    }
+  }
+
   drawScore(value) {
     push();
     fill(144, 181, 224);
@@ -49,6 +64,7 @@ class UserInterface {
   }
   preload() {
     this.heart = loadImage("assets/images/ui/hearts32x32.png");
+    this.shuriken = loadImage("assets/images/weapons/shuriken/shuriken.png");
     this.font = loadFont("assets/fonts/Mister Pixel Regular.otf");
   }
 }

@@ -7,10 +7,13 @@ class Player {
     this.projectileArray = [];
     this.state = PLAYER_STATES.idle;
     this.direction = PLAYER_DIRECTIONS.down;
+
     this.moveSpeed = PLAYER_BASESTATS.moveSpeed;
     this.health = PLAYER_BASESTATS.health;
     this.maxHealth = PLAYER_BASESTATS.maxHealth;
     this.strength = PLAYER_BASESTATS.strength;
+    this.shurikenCount = PLAYER_BASESTATS.shurikenCount;
+    this.maxShuriken = PLAYER_BASESTATS.maxShuriken;
     this.attackMoment = 0;
   }
 
@@ -54,6 +57,13 @@ class Player {
     this.projectileArray.forEach((projectile) => {
       projectile.draw();
     });
+    if (
+      this.attackMoment + 15 <= frameCount &&
+      frameCount % 20 === 0 &&
+      this.shurikenCount < this.maxShuriken
+    ) {
+      this.shurikenCount++;
+    }
 
     // Removing bad projectiles
     this.cleanUpShuriken();
@@ -105,7 +115,11 @@ class Player {
   }
 
   keyPressed() {
-    if (keyCode === SPACE_BAR && this.state !== PLAYER_STATES.dead) {
+    if (
+      keyCode === SPACE_BAR &&
+      this.state !== PLAYER_STATES.dead &&
+      this.shurikenCount > 0
+    ) {
       this.shuriken();
     }
   }
@@ -130,6 +144,7 @@ class Player {
       top = this.y + this.height * 0.75;
     }
     this.projectileArray.push(new Projectile(left, top, this.direction));
+    this.shurikenCount--;
   }
 
   // removing bad projectiles
@@ -154,6 +169,8 @@ class Player {
     this.health = PLAYER_BASESTATS.health;
     this.maxHealth = PLAYER_BASESTATS.maxHealth;
     this.strength = PLAYER_BASESTATS.strength;
+    this.shurikenCount = PLAYER_BASESTATS.shurikenCount;
+    this.maxShuriken = PLAYER_BASESTATS.maxShuriken;
 
     this.state = PLAYER_STATES.idle;
     this.direction = PLAYER_DIRECTIONS.down;

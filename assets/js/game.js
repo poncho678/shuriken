@@ -76,11 +76,12 @@ class Game {
     // draw UI and Update score
     this.ui.draw();
     this.ui.drawScore(this.score);
+    this.ui.drawShuriken(this.player.shurikenCount);
   }
 
   dropPowerup(opponentX, opponentY) {
     const chance = Math.random();
-    if (chance > 0.92) {
+    if (chance > 0.95) {
       this.powerUpArray.push(new Powerup(opponentX, opponentY));
     }
   }

@@ -37,13 +37,16 @@ const PLAYER_BASESTATS = {
   x: CANVAS_WIDTH / 2 - PLAYER_SIZE / 2,
   y: CANVAS_HEIGHT / 2 - PLAYER_SIZE * 1.75,
   health: 3,
-  maxHealth: 3,
   healthCap: 6,
+  maxHealth: 3,
   moveSpeed: CANVAS_WIDTH / 150,
   moveSpeedCap: (CANVAS_WIDTH / 150) * 1.5,
   projectileSpeed: 15,
   strength: 1,
   strengthCap: 3,
+  shurikenCount: 3,
+  maxShuriken: 3,
+  shurikenCap: 10,
 };
 Object.freeze(PLAYER_BASESTATS);
 

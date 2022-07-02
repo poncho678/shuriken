@@ -31,6 +31,17 @@ class Powerup {
   randomPowerUp() {
     const powerUpArray = [
       {
+        img: loadImage("assets/images/weapons/shuriken/shuriken.png"),
+        effect: function (player) {
+          if (!this.powerUpUsed) {
+            if (player.maxShuriken < PLAYER_BASESTATS.shurikenCap) {
+              player.maxShuriken += 1;
+            }
+            this.powerUpUsed = true;
+          }
+        },
+      },
+      {
         img: loadImage("assets/images/powerups/yakitori.png"),
         effect: function (player) {
           if (!this.powerUpUsed) {
