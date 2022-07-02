@@ -80,7 +80,7 @@ class Game {
 
   dropPowerup(opponentX, opponentY) {
     const chance = Math.random();
-    if (chance > 0.9) {
+    if (chance > 0.5) {
       this.powerUpArray.push(new Powerup(opponentX, opponentY));
     }
   }

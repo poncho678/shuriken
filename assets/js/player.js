@@ -163,9 +163,7 @@ class Player {
 
   preload() {
     // loading Pprojectileimage here, because no idea how else to preload...
-    shurikenImage = [
-      loadImage("assets/images/weapons/shuriken/shuriken_level_1.png"),
-    ];
+    shurikenImage = [loadImage("assets/images/weapons/shuriken/shuriken.png")];
     // adding PlayerSprites
     this.playerSprites = {
       [PLAYER_STATES.attack]: {

@@ -28,9 +28,9 @@ class Projectile {
     image(shurikenImage[0], 0, 0, this.width, this.height);
 
     if (this.direction === "left") {
-      this.rotation -= 6;
+      this.rotation -= 5;
     } else {
-      this.rotation += 6;
+      this.rotation += 5;
     }
 
     if (this.direction === "up") {

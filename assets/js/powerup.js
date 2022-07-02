@@ -2,8 +2,8 @@ class Powerup {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.width = PLAYER_SIZE / 2;
-    this.height = PLAYER_SIZE / 2;
+    this.width = PLAYER_SIZE;
+    this.height = PLAYER_SIZE;
     this.data = this.randomPowerUp();
     this.powerUpUsed = false;
   }
@@ -24,15 +24,14 @@ class Powerup {
     pop();
 
     push();
-    fill(this.data.color);
-    rect(this.x, this.y, this.width, this.height);
+    image(this.data.img, this.x, this.y, this.width, this.height);
     pop();
   }
 
   randomPowerUp() {
     const powerUpArray = [
       {
-        color: "green",
+        img: loadImage("assets/images/powerups/yakitori.png"),
         effect: function (player) {
           if (!this.powerUpUsed) {
             if (player.health < player.maxHealth) {
@@ -43,13 +42,14 @@ class Powerup {
         },
       },
       {
-        color: "blue",
+        img: loadImage("assets/images/powerups/heart.png"),
         effect: function (player) {
           if (!this.powerUpUsed) {
             if (
               player.maxHealth < PLAYER_BASESTATS.healthCap &&
               player.health === player.maxHealth
             ) {
+              player.health += 1;
               player.maxHealth += 1;
             } else {
               if (player.health < player.maxHealth) {
@@ -61,7 +61,7 @@ class Powerup {
         },
       },
       {
-        color: "red",
+        img: loadImage("assets/images/powerups/scrollfire.png"),
         effect: function (player) {
           if (!this.powerUpUsed) {
             if (player.strength < PLAYER_BASESTATS.strengthCap) {
@@ -72,7 +72,7 @@ class Powerup {
         },
       },
       {
-        color: "yellow",
+        img: loadImage("/assets/images/powerups/scrollthunder.png"),
         effect: function (player) {
           if (!this.powerUpUsed) {
             if (player.moveSpeed < PLAYER_BASESTATS.moveSpeedCap) {
