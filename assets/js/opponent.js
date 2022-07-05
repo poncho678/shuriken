@@ -1,14 +1,15 @@
 class Opponent {
-  constructor(player) {
+  constructor(player, level) {
     this.player = player;
     this.width = PLAYER_SIZE;
     this.height = PLAYER_SIZE;
+    this.level = level;
     this.x = this.spawnRandom(0, CANVAS_WIDTH - this.width, this.player.x);
     this.y = this.spawnRandom(0, CANVAS_HEIGHT - this.height, this.player.y);
     this.direction = OPPONENT_DIRECTIONS.down;
-    this.health = 3;
-    this.maxHealth = 3;
-    this.speed = 2;
+    this.health = 3 + this.level * 0.05;
+    this.maxHealth = this.health;
+    this.speed = 2 + this.level * 0.05;
     this.gotHit = false;
     this.gotHitMoment = 0;
   }

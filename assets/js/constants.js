@@ -45,8 +45,8 @@ const PLAYER_BASESTATS = {
   strength: 1,
   strengthCap: 3,
   shurikenCount: 3,
-  maxShuriken: 3,
-  shurikenCap: 10,
+  maxShuriken: 4,
+  shurikenCap: 15,
 };
 Object.freeze(PLAYER_BASESTATS);
 
@@ -74,3 +74,6 @@ const OPPONENT_DIRECTIONS = {
   left: "left",
 };
 Object.freeze(OPPONENT_DIRECTIONS);
+
+//
+const capReached = "capReached";

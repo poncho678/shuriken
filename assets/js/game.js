@@ -4,7 +4,9 @@ class Game {
     this.opponentsArray = [];
     this.powerUpArray = [];
     this.score = 0;
+    this.level = 0;
     this.counter = 0;
+    this.hasCountIncreased = false;
     this.ui = new UserInterface(this.player);
     this.background = new Background();
   }
@@ -12,10 +14,21 @@ class Game {
     this.background.draw();
     this.player.draw();
 
+    //
+    if (
+      this.counter !== 0 &&
+      this.counter % 5 === 0 &&
+      this.hasCountIncreased
+    ) {
+      this.level++;
+      console.log(this.level);
+      this.hasCountIncreased = false;
+    }
+
     // create opponents...
-    if (frameCount % 120 === 0) {
+    if (frameCount % (120 - this.level * 1) === 0) {
       if (this.opponentsArray.length <= 50) {
-        this.opponentsArray.push(new Opponent(this.player));
+        this.opponentsArray.push(new Opponent(this.player, this.level));
       }
     }
 
@@ -23,7 +36,11 @@ class Game {
     this.powerUpArray.forEach((powerup) => {
       powerup.draw();
       if (this.collionCheck(this.player, powerup)) {
-        powerup.data.effect(this.player);
+        powerup.effect(this.player, this.level, this.score);
+        this.score += powerup.score();
+        if (this.level > powerup.level()) {
+          this.level -= powerup.level();
+        }
         this.powerUpArray = this.removeItemFromArray(
           powerup,
           this.powerUpArray
@@ -61,7 +78,10 @@ class Game {
 
           // check if health of Opponent is 0, then remove from array
           if (opponent.health <= 0) {
-            this.score += opponent.maxHealth * 100;
+            this.score += Math.floor(
+              opponent.maxHealth * 100 * (this.level * 0.1 + 1)
+            );
+            this.hasCountIncreased = true;
             this.counter += 1;
             this.dropPowerup(opponent.x, opponent.y);
             this.opponentsArray = this.removeItemFromArray(
@@ -81,8 +101,10 @@ class Game {
 
   dropPowerup(opponentX, opponentY) {
     const chance = Math.random();
-    if (chance > 0.95) {
-      this.powerUpArray.push(new Powerup(opponentX, opponentY));
+    if (chance > 0.8) {
+      this.powerUpArray.push(
+        new Powerup(opponentX, opponentY, this.level, this.score)
+      );
     }
   }
 
@@ -91,6 +113,7 @@ class Game {
     this.opponentsArray = [];
     this.powerUpArray = [];
     this.score = 0;
+    this.level = 0;
     this.counter = 0;
     this.player.reset();
   }

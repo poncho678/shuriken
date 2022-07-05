@@ -4,7 +4,7 @@ class Powerup {
     this.y = y;
     this.width = PLAYER_SIZE;
     this.height = PLAYER_SIZE;
-    this.data = this.randomPowerUp();
+    this.power = this.randomPowerUp();
     this.powerUpUsed = false;
   }
   draw() {
@@ -24,15 +24,25 @@ class Powerup {
     pop();
 
     push();
-    image(this.data.img, this.x, this.y, this.width, this.height);
+    image(this.power.img, this.x, this.y, this.width, this.height);
     pop();
+  }
+
+  effect(player, level, score) {
+    this.power.effect(player, level, score);
+  }
+  score() {
+    return this.power.score;
+  }
+  level() {
+    return this.power.level;
   }
 
   randomPowerUp() {
     const powerUpArray = [
       {
         img: loadImage("assets/images/weapons/shuriken/shuriken.png"),
-        effect: function (player) {
+        effect: function (player, level) {
           if (!this.powerUpUsed) {
             if (player.maxShuriken < PLAYER_BASESTATS.shurikenCap) {
               player.maxShuriken += 1;
@@ -40,10 +50,12 @@ class Powerup {
             this.powerUpUsed = true;
           }
         },
+        score: 0,
+        level: 0,
       },
       {
         img: loadImage("assets/images/powerups/yakitori.png"),
-        effect: function (player) {
+        effect: function (player, level) {
           if (!this.powerUpUsed) {
             if (player.health < player.maxHealth) {
               player.health += 1;
@@ -51,25 +63,27 @@ class Powerup {
             this.powerUpUsed = true;
           }
         },
+        score: 0,
+        level: 0,
       },
       {
         img: loadImage("assets/images/powerups/heart.png"),
         effect: function (player) {
           if (!this.powerUpUsed) {
-            if (
-              player.maxHealth < PLAYER_BASESTATS.healthCap &&
-              player.health === player.maxHealth
-            ) {
+            if (player.maxHealth < PLAYER_BASESTATS.healthCap) {
               player.health += 1;
               player.maxHealth += 1;
-            } else {
-              if (player.health < player.maxHealth) {
-                player.health += 1;
-              }
+            } else if (
+              player.maxHealth === PLAYER_BASESTATS.healthCap &&
+              player.health < player.maxHealth
+            ) {
+              player.health += 1;
             }
             this.powerUpUsed = true;
           }
         },
+        score: 0,
+        level: 0,
       },
       {
         img: loadImage("assets/images/powerups/scrollfire.png"),
@@ -81,9 +95,11 @@ class Powerup {
             this.powerUpUsed = true;
           }
         },
+        score: 0,
+        level: 0,
       },
       {
-        img: loadImage("/assets/images/powerups/scrollthunder.png"),
+        img: loadImage("assets/images/powerups/scrollthunder.png"),
         effect: function (player) {
           if (!this.powerUpUsed) {
             if (player.moveSpeed < PLAYER_BASESTATS.moveSpeedCap) {
@@ -92,6 +108,28 @@ class Powerup {
             this.powerUpUsed = true;
           }
         },
+        score: 0,
+        level: 0,
+      },
+      {
+        img: loadImage("assets/images/powerups/fortunecookie.png"),
+        effect: function (player) {
+          if (!this.powerUpUsed) {
+            this.powerUpUsed = true;
+          }
+        },
+        score: 0,
+        level: 1,
+      },
+      {
+        img: loadImage("assets/images/powerups/honey.png"),
+        effect: function (player) {
+          if (!this.powerUpUsed) {
+          }
+          this.powerUpUsed = true;
+        },
+        score: 5000,
+        level: 0,
       },
     ];
     return powerUpArray[Math.floor(powerUpArray.length * Math.random())];
