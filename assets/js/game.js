@@ -17,11 +17,10 @@ class Game {
     //
     if (
       this.counter !== 0 &&
-      this.counter % 7 === 0 &&
+      this.counter % 6 === 0 &&
       this.hasCountIncreased
     ) {
       this.level++;
-      console.log(this.level);
       this.hasCountIncreased = false;
     }
 
@@ -40,7 +39,6 @@ class Game {
         this.score += powerup.score();
         if (this.level >= powerup.level()) {
           this.level -= powerup.level();
-          console.log("newlevel: " + this.level);
         }
         this.powerUpArray = this.removeItemFromArray(
           powerup,
@@ -102,7 +100,7 @@ class Game {
 
   dropPowerup(opponentX, opponentY) {
     const chance = Math.random();
-    if (chance > 0.85) {
+    if (chance > 0.82) {
       this.powerUpArray.push(
         new Powerup(opponentX, opponentY, this.level, this.score)
       );
