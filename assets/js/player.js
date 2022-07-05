@@ -58,8 +58,8 @@ class Player {
       projectile.draw();
     });
     if (
-      this.attackMoment + 15 <= frameCount &&
-      frameCount % 20 === 0 &&
+      this.attackMoment + 20 <= frameCount &&
+      frameCount % 18 === 0 &&
       this.shurikenCount < this.maxShuriken
     ) {
       this.shurikenCount++;

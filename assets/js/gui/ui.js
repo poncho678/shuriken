@@ -54,12 +54,22 @@ class UserInterface {
   }
 
   drawScore(value) {
-    push();
-    fill(144, 181, 224);
+    const highScore = JSON.parse(localStorage.getItem("HighScores"))[0];
     textAlign(RIGHT);
     textFont(this.font);
     textSize(this.fontSize);
-    text(`score: ${value}`, CANVAS_WIDTH - this.fontSize, this.fontSize);
+    push();
+    fill("lightgray");
+    text(
+      `Highscore: ${highScore}`,
+      CANVAS_WIDTH - this.fontSize,
+      this.fontSize
+    );
+    pop();
+
+    push();
+    fill("white");
+    text(`Score: ${value}`, CANVAS_WIDTH - this.fontSize, this.fontSize * 2);
     pop();
   }
   preload() {

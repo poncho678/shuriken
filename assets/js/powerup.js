@@ -32,9 +32,15 @@ class Powerup {
     this.power.effect(player, level, score);
   }
   score() {
+    if (this.power.score === undefined) {
+      return 0;
+    }
     return this.power.score;
   }
   level() {
+    if (!this.power.level === undefined) {
+      return 0;
+    }
     return this.power.level;
   }
 
@@ -50,8 +56,6 @@ class Powerup {
             this.powerUpUsed = true;
           }
         },
-        score: 0,
-        level: 0,
       },
       {
         img: loadImage("assets/images/powerups/yakitori.png"),
@@ -63,8 +67,6 @@ class Powerup {
             this.powerUpUsed = true;
           }
         },
-        score: 0,
-        level: 0,
       },
       {
         img: loadImage("assets/images/powerups/heart.png"),
@@ -82,8 +84,6 @@ class Powerup {
             this.powerUpUsed = true;
           }
         },
-        score: 0,
-        level: 0,
       },
       {
         img: loadImage("assets/images/powerups/scrollfire.png"),
@@ -95,8 +95,6 @@ class Powerup {
             this.powerUpUsed = true;
           }
         },
-        score: 0,
-        level: 0,
       },
       {
         img: loadImage("assets/images/powerups/scrollthunder.png"),
@@ -108,8 +106,6 @@ class Powerup {
             this.powerUpUsed = true;
           }
         },
-        score: 0,
-        level: 0,
       },
       {
         img: loadImage("assets/images/powerups/fortunecookie.png"),
@@ -118,7 +114,6 @@ class Powerup {
             this.powerUpUsed = true;
           }
         },
-        score: 0,
         level: 1,
       },
       {
@@ -129,7 +124,6 @@ class Powerup {
           this.powerUpUsed = true;
         },
         score: 5000,
-        level: 0,
       },
     ];
     return powerUpArray[Math.floor(powerUpArray.length * Math.random())];

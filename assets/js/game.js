@@ -17,7 +17,7 @@ class Game {
     //
     if (
       this.counter !== 0 &&
-      this.counter % 5 === 0 &&
+      this.counter % 7 === 0 &&
       this.hasCountIncreased
     ) {
       this.level++;
@@ -26,7 +26,7 @@ class Game {
     }
 
     // create opponents...
-    if (frameCount % (120 - this.level * 1) === 0) {
+    if (frameCount % (100 - this.level) === 0) {
       if (this.opponentsArray.length <= 50) {
         this.opponentsArray.push(new Opponent(this.player, this.level));
       }
@@ -38,8 +38,9 @@ class Game {
       if (this.collionCheck(this.player, powerup)) {
         powerup.effect(this.player, this.level, this.score);
         this.score += powerup.score();
-        if (this.level > powerup.level()) {
+        if (this.level >= powerup.level()) {
           this.level -= powerup.level();
+          console.log("newlevel: " + this.level);
         }
         this.powerUpArray = this.removeItemFromArray(
           powerup,
@@ -101,13 +102,12 @@ class Game {
 
   dropPowerup(opponentX, opponentY) {
     const chance = Math.random();
-    if (chance > 0.8) {
+    if (chance > 0.85) {
       this.powerUpArray.push(
         new Powerup(opponentX, opponentY, this.level, this.score)
       );
     }
   }
-
   // Reset The Game
   reset() {
     this.opponentsArray = [];

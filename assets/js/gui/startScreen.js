@@ -35,8 +35,10 @@ class Startscreen {
     // image(this.shurikenImage, 0, 0, CANVAS_HEIGHT / 4, CANVAS_HEIGHT / 4);
     // pop();
   }
+
   preload() {
     this.background.preload();
+
     this.font = loadFont("assets/fonts/Mister Pixel Regular.otf");
     this.shurikenImage = loadImage(
       "assets/images/weapons/shuriken/shuriken_level_1.png"
