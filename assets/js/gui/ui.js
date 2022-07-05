@@ -54,8 +54,8 @@ class UserInterface {
   }
 
   drawScore(value) {
-    const highScore =
-      JSON.parse(localStorage.getItem("HighScores"))[0] === null
+    let highScore =
+      JSON.parse(localStorage.getItem("HighScores")) == null
         ? 0
         : JSON.parse(localStorage.getItem("HighScores"))[0];
     textAlign(RIGHT);
