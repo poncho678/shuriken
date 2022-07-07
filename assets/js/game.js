@@ -256,6 +256,9 @@ class Game {
   keyPressed() {
     this.player.keyPressed();
   }
+  keyReleased() {
+    this.player.keyReleased();
+  }
 
   collionCheck(a, b) {
     const bottomOfA = a.y + a.height;

@@ -7,8 +7,8 @@ class Player {
     this.projectileArray = [];
     this.state = PLAYER_STATES.idle;
     this.direction = PLAYER_DIRECTIONS.down;
-
     this.moveSpeed = PLAYER_BASESTATS.moveSpeed;
+    this.moveSpeedNormal = PLAYER_BASESTATS.moveSpeed;
     this.health = PLAYER_BASESTATS.health;
     this.maxHealth = PLAYER_BASESTATS.maxHealth;
     this.strength = PLAYER_BASESTATS.strength;
@@ -112,16 +112,25 @@ class Player {
         this.direction = PLAYER_DIRECTIONS.up;
       }
     }
+    if (keyIsDown(KEY_SHIFT)) {
+      this.moveSpeed = this.moveSpeedNormal * 1.25;
+    }
   }
 
   keyPressed() {
     if (
       keyCode === SPACE_BAR &&
       this.state !== PLAYER_STATES.dead &&
-      this.shurikenCount > 0
+      this.shurikenCount > 0 &&
+      this.moveSpeed === this.moveSpeedNormal
     ) {
       this.shuriken();
       soundAttack.play();
+    }
+  }
+  keyReleased() {
+    if (keyCode === KEY_SHIFT) {
+      this.moveSpeed = this.moveSpeedNormal;
     }
   }
 

@@ -48,6 +48,10 @@ function keyPressed() {
   }
 }
 
+function keyReleased() {
+  game.keyReleased();
+}
+
 function preload() {
   this.soundSelect = loadSound("assets/sounds/Menu11.wav");
   this.soundFight = loadSound("assets/sounds/17 - Fight.ogg");

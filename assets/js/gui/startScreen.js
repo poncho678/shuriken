@@ -27,13 +27,16 @@ class Startscreen {
     text("PRESS ENTER TO PLAY", CANVAS_WIDTH / 2, (CANVAS_HEIGHT / 5) * 4);
     pop();
 
-    // push();
-    // this.rotation += 0.01;
-    // translate(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
-    // rotate(this.rotation);
-    // imageMode(CENTER);
-    // image(this.shurikenImage, 0, 0, CANVAS_HEIGHT / 4, CANVAS_HEIGHT / 4);
-    // pop();
+    push();
+    fill("lightgray");
+    textAlign(CENTER, BOTTOM);
+    textSize(PLAYER_SIZE / 3);
+    text(
+      "USE ARROW KEYS TO MOVE, PRESS SHIFT TO SPRINT, PRESS SPACE TO ATTACK",
+      CANVAS_WIDTH / 2,
+      CANVAS_HEIGHT - 10
+    );
+    pop();
   }
 
   preload() {

@@ -102,6 +102,7 @@ class Powerup {
           if (!this.powerUpUsed) {
             if (player.moveSpeed < PLAYER_BASESTATS.moveSpeedCap) {
               player.moveSpeed += 0.5;
+              player.moveSpeedNormal += 0.5;
             }
             this.powerUpUsed = true;
           }
