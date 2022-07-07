@@ -121,6 +121,7 @@ class Player {
       this.shurikenCount > 0
     ) {
       this.shuriken();
+      soundAttack.play();
     }
   }
 
@@ -179,6 +180,9 @@ class Player {
   }
 
   preload() {
+    soundAttack = loadSound("assets/sounds/Fireball.wav");
+    soundAttack.setVolume(0.2);
+
     // loading Pprojectileimage here, because no idea how else to preload...
     shurikenImage = [loadImage("assets/images/weapons/shuriken/shuriken.png")];
     // adding PlayerSprites

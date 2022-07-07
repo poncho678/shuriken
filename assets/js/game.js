@@ -35,6 +35,7 @@ class Game {
     this.powerUpArray.forEach((powerup) => {
       powerup.draw();
       if (this.collionCheck(this.player, powerup)) {
+        this.soundPowerup.play();
         powerup.effect(this.player, this.level, this.score);
         this.score += powerup.score();
         if (this.level >= powerup.level()) {
@@ -53,8 +54,8 @@ class Game {
 
       // check if player collides with opponents
       if (this.collionCheck(this.player, opponent)) {
+        this.soundDamageTaken.play();
         this.player.health -= 1;
-
         this.opponentsArray = this.removeItemFromArray(
           opponent,
           this.opponentsArray
@@ -66,6 +67,7 @@ class Game {
     this.player.projectileArray.forEach((projectile) => {
       this.opponentsArray.forEach((opponent) => {
         if (this.collionCheck(projectile, opponent)) {
+          this.soundHit.play();
           // if projectile hits enemy, remove projectile from Array
           this.player.projectileArray = this.removeItemFromArray(
             projectile,
@@ -117,6 +119,11 @@ class Game {
   }
 
   preload() {
+    this.soundHit = loadSound("assets/sounds/Hit.wav");
+    this.soundHit.setVolume(0.3);
+    this.soundDamageTaken = loadSound("assets/sounds/MiniImpact.wav");
+    this.soundPowerup = loadSound("assets/sounds/PowerUp1.wav");
+
     this.background.preload();
     this.player.preload();
     this.ui.preload();

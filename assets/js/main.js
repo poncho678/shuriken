@@ -6,6 +6,7 @@ let canSaveScore = true;
 
 function setup() {
   pixelDensity(1);
+  // volume(1);
   createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 }
 
@@ -30,10 +31,17 @@ function draw() {
   }
 }
 function keyPressed() {
-  if (currentGameState === GAME_STATES.start || GAME_STATES.dead) {
+  if (
+    currentGameState === GAME_STATES.start ||
+    currentGameState === GAME_STATES.dead
+  ) {
+    console.log("yikes");
     if (keyCode === KEY_ENTER) {
+      this.soundSelect.play();
       game.reset();
       currentGameState = GAME_STATES.play;
+      this.soundFight.play();
+      this.soundFight.loop();
     }
   }
   if (currentGameState === GAME_STATES.play) {
@@ -42,6 +50,11 @@ function keyPressed() {
 }
 
 function preload() {
+  this.soundSelect = loadSound("assets/sounds/Menu11.wav");
+  this.soundFight = loadSound("assets/sounds/17 - Fight.ogg");
+  this.soundFight.setVolume(0.75);
+  this.soundGameOver = loadSound("assets/sounds/GameOver.wav");
+  this.soundGameOver.setVolume(0.75);
   game.preload();
   deathScreen.preload();
   startScreen.preload();
@@ -49,8 +62,13 @@ function preload() {
 
 // Set Game State based on Player Health
 function setGameState() {
-  if (game.player.state === PLAYER_STATES.dead) {
+  if (
+    game.player.state === PLAYER_STATES.dead &&
+    currentGameState !== GAME_STATES.dead
+  ) {
+    this.soundFight.stop();
     currentGameState = GAME_STATES.dead;
+    this.soundGameOver.play();
   }
 }
 

@@ -77,3 +77,6 @@ Object.freeze(OPPONENT_DIRECTIONS);
 
 //
 const capReached = "capReached";
+
+// Sounds
+let soundAttack;

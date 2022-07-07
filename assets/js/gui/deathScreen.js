@@ -50,14 +50,6 @@ class DeathScreen {
       }
     }
 
-    // image(
-    //   this.playerDead,
-    //   CANVAS_WIDTH / 2 - PLAYER_SIZE / 2,
-    //   CANVAS_HEIGHT / 2,
-    //   PLAYER_SIZE,
-    //   PLAYER_SIZE
-    // );
-
     // draw restart...
     push();
     textAlign(CENTER, CENTER);
