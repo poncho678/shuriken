@@ -25,7 +25,7 @@ class Game {
     }
 
     // create opponents...
-    let maxCount = 100 - this.level * 3 < 80 ? 60 : 100 - this.level * 3;
+    let maxCount = 100 - this.level * 2 < 80 ? 60 : 100 - this.level * 2;
     if (frameCount % maxCount === 0) {
       if (this.opponentsArray.length <= 25) {
         this.opponentsArray.push(new Opponent(this.player, this.level));
@@ -68,6 +68,7 @@ class Game {
     this.player.projectileArray.forEach((projectile) => {
       this.opponentsArray.forEach((opponent) => {
         if (this.collionCheck(projectile, opponent)) {
+          this.soundHit.stop();
           this.soundHit.play();
           // if projectile hits enemy, remove projectile from Array
           this.player.projectileArray = this.removeItemFromArray(
