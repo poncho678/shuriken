@@ -15,6 +15,8 @@ class Player {
     this.shurikenCount = PLAYER_BASESTATS.shurikenCount;
     this.maxShuriken = PLAYER_BASESTATS.maxShuriken;
     this.attackMoment = 0;
+    this.gotHit = false;
+    this.gotHitMoment = 0;
   }
 
   draw() {
@@ -39,7 +41,10 @@ class Player {
       this.height / 3
     );
     pop();
-
+    push();
+    if (this.gotHit) {
+      tint(255, 0, 0);
+    }
     // drawing the player
     image(
       playerSprite[index].img,
@@ -52,7 +57,11 @@ class Player {
       playerSprite[index].width,
       playerSprite[index].height
     );
-
+    if (this.gotHitMoment + 3 <= frameCount && this.gotHit) {
+      this.gotHit = false;
+      noTint();
+    }
+    pop();
     // Shooting Mechanics
     this.projectileArray.forEach((projectile) => {
       projectile.draw();

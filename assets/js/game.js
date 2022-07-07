@@ -57,6 +57,8 @@ class Game {
       if (this.collionCheck(this.player, opponent)) {
         this.soundDamageTaken.play();
         this.player.health -= 1;
+        this.player.gotHit = true;
+        this.player.gotHitMoment = frameCount;
         this.opponentsArray = this.removeItemFromArray(
           opponent,
           this.opponentsArray
