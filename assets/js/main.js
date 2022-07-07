@@ -35,7 +35,6 @@ function keyPressed() {
     currentGameState === GAME_STATES.start ||
     currentGameState === GAME_STATES.dead
   ) {
-    console.log("yikes");
     if (keyCode === KEY_ENTER) {
       this.soundSelect.play();
       game.reset();
