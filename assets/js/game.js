@@ -36,6 +36,7 @@ class Game {
     this.powerUpArray.forEach((powerup) => {
       powerup.draw();
       if (this.collionCheck(this.player, powerup)) {
+        this.soundPowerup.stop();
         this.soundPowerup.play();
         powerup.effect(this.player, this.level, this.score);
         this.score += powerup.score();
@@ -55,6 +56,7 @@ class Game {
 
       // check if player collides with opponents
       if (this.collionCheck(this.player, opponent)) {
+        this.soundDamageTaken.stop();
         this.soundDamageTaken.play();
         this.player.health -= 1;
         this.player.gotHit = true;
