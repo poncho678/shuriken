@@ -32,9 +32,9 @@ class Startscreen {
     textAlign(CENTER, BOTTOM);
     textSize(PLAYER_SIZE / 3);
     text(
-      "USE ARROW KEYS TO MOVE, PRESS SHIFT TO SPRINT, PRESS SPACE TO ATTACK",
+      "ARROW KEYS TO MOVE • SHIFT TO SPRINT • SPACE TO ATTACK",
       CANVAS_WIDTH / 2,
-      CANVAS_HEIGHT - 10
+      CANVAS_HEIGHT - PLAYER_SIZE / 3
     );
     pop();
   }
