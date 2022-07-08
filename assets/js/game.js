@@ -99,7 +99,7 @@ class Game {
     });
 
     // draw UI and Update score
-    this.ui.draw();
+    this.ui.drawHealth(this.player.health, this.player.maxHealth);
     this.ui.drawScore(this.score);
     this.ui.drawShuriken(this.player.shurikenCount);
   }

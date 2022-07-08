@@ -1,16 +1,11 @@
 class UserInterface {
-  constructor(player) {
-    this.player = player;
+  constructor() {
     this.fontSize = CANVAS_WIDTH / 32;
   }
 
-  draw() {
-    this.drawHealth();
-  }
-
-  drawHealth() {
-    for (let i = 0; i < this.player.maxHealth; i++) {
-      if (i < this.player.health) {
+  drawHealth(playerHealth, playerMaxhealth) {
+    for (let i = 0; i < playerMaxhealth; i++) {
+      if (i < playerHealth) {
         image(
           this.heart,
           this.fontSize + i * PLAYER_SIZE,

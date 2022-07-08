@@ -41,6 +41,7 @@ class Player {
       this.height / 3
     );
     pop();
+
     push();
     if (this.gotHit) {
       tint(255, 0, 0);

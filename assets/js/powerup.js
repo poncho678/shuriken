@@ -8,10 +8,10 @@ class Powerup {
     this.powerUpUsed = false;
   }
   draw() {
-    //draw dropshadow
     if (!this.powerUpUsed) {
       this.powerUpUsed = true;
     }
+    //draw dropshadow
     push();
     fill(0, 0, 0, 55);
     noStroke();
