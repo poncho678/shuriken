@@ -17,7 +17,7 @@ class Game {
     //
     if (
       this.counter !== 0 &&
-      this.counter % 6 === 0 &&
+      this.counter % 7 === 0 &&
       this.hasCountIncreased
     ) {
       this.level++;
@@ -25,7 +25,7 @@ class Game {
     }
 
     // create opponents...
-    let maxCount = 100 - this.level * 2 < 80 ? 60 : 100 - this.level * 2;
+    let maxCount = 120 - this.level * 2 < 80 ? 60 : 120 - this.level * 2;
     if (frameCount % maxCount === 0) {
       if (this.opponentsArray.length <= 25) {
         this.opponentsArray.push(new Opponent(this.player, this.level));
