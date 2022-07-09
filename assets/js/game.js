@@ -17,7 +17,7 @@ class Game {
     //
     if (
       this.counter !== 0 &&
-      this.counter % 7 === 0 &&
+      this.counter % 5 === 0 &&
       this.hasCountIncreased
     ) {
       this.level++;
