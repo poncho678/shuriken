@@ -1,6 +1,6 @@
 // Game Settings
 const CANVAS_WIDTH = 1000;
-const CANVAS_HEIGHT = (CANVAS_WIDTH / 16) * 10;
+const CANVAS_HEIGHT = (CANVAS_WIDTH / 16) * 9;
 const PLAYER_SIZE = CANVAS_WIDTH / 16;
 const TILESIZE = 32;
 
